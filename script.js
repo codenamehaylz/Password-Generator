@@ -91,10 +91,20 @@ var upperCasedCharacters = [
 // Function to prompt user for password options
 function getPasswordOptions() {
   var chooseLength = prompt("Enter how many characters the password should have (between 10 - 64)");
-  var chooseLowercase = prompt("Should the password include lowercase characters? Enter y or n");
-  var chooseUppercase = prompt("Should the password include uppercase characters? Enter y or n");
-  var chooseNumeric = prompt("Should the password include numeric characters? Enter y or n");
-  var chooseSpecial = prompt("Should the password include special characters? Enter y or n");
+    while (chooseLength < 10 || chooseLength > 64) {
+      chooseLength = prompt("It must be between 10 - 64 characters, please enter again");
+    }
+  var chooseLowercase = confirm("Should the password include lowercase characters?");
+  var chooseUppercase = confirm("Should the password include uppercase characters?");
+  var chooseNumeric = confirm("Should the password include numeric characters?");
+  var chooseSpecial = confirm("Should the password include special characters?");
+    while (!chooseLowercase && !chooseUppercase && !chooseNumeric && !chooseSpecial) {
+      alert("The password must include at least one of these options, select again");
+      var chooseLowercase = confirm("Should the password include lowercase characters?");
+      var chooseUppercase = confirm("Should the password include uppercase characters?");
+      var chooseNumeric = confirm("Should the password include numeric characters?");
+      var chooseSpecial = confirm("Should the password include special characters?");
+    }
   return [chooseLength,chooseLowercase,chooseUppercase,chooseNumeric,chooseSpecial];
 }
 
