@@ -89,6 +89,7 @@ var upperCasedCharacters = [
 ];
 
 // Function to prompt user for password options
+  //while loops to ensure the user inputs are valid
 function getPasswordOptions() {
   var chooseLength = prompt("Enter how many characters the password should have (between 10 - 64)");
     while (chooseLength < 10 || chooseLength > 64) {
@@ -110,13 +111,36 @@ function getPasswordOptions() {
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-
+  return arr[Math.floor(Math.random () * arr.length)];
 }
 
 // Function to generate password with user input
+//TODO find way of guaranteeing that password WILL include one of each user selection
 function generatePassword() {
   var userChoices = getPasswordOptions();
+  var passLength = +userChoices[0];
+  var passPool = [];
+  if (userChoices[1]) {
+    passPool = passPool.concat(lowerCasedCharacters);
+  }
+  if (userChoices[2]) {
+    passPool = passPool.concat(upperCasedCharacters);
+  }
+  if (userChoices[3]) {
+    passPool = passPool.concat(numericCharacters);
+  }
+  if (userChoices[4]) {
+    passPool = passPool.concat(specialCharacters);
+  }
+
+  var randomPassword = [];
+  for (var i=0;i<passLength;i++) {
+    randomPassword.push(getRandom(passPool));
+  }
   console.log(userChoices);
+  console.log(passPool);
+  console.log(randomPassword);
+  return randomPassword.join('');
 }
 
 // Get references to the #generate element
