@@ -115,30 +115,106 @@ function getRandom(arr) {
 }
 
 // Function to generate password with user input
-//TODO find way of guaranteeing that password WILL include one of each user selection
+//TODO find a way to condense these if statements??
 function generatePassword() {
   var userChoices = getPasswordOptions();
   var passLength = +userChoices[0];
-  var passPool = [];
-  if (userChoices[1]) {
-    passPool = passPool.concat(lowerCasedCharacters);
+  var randomPassword = [];
+
+  if (userChoices[1] && userChoices[2] && userChoices[3] && userChoices[4]) {
+    while (randomPassword.length < passLength) {
+      randomPassword.push(getRandom(lowerCasedCharacters));
+      randomPassword.push(getRandom(upperCasedCharacters));
+      randomPassword.push(getRandom(numericCharacters));
+      randomPassword.push(getRandom(specialCharacters));
+    }
   }
-  if (userChoices[2]) {
-    passPool = passPool.concat(upperCasedCharacters);
+  else if (userChoices[1] && !userChoices[2] && !userChoices[3] && !userChoices[4]) {
+    while (randomPassword.length < passLength) {
+      randomPassword.push(getRandom(lowerCasedCharacters));
+    }
   }
-  if (userChoices[3]) {
-    passPool = passPool.concat(numericCharacters);
+  else if (!userChoices[1] && userChoices[2] && !userChoices[3] && !userChoices[4]) {
+    while (randomPassword.length < passLength) {
+      randomPassword.push(getRandom(upperCasedCharacters));
+    }
   }
-  if (userChoices[4]) {
-    passPool = passPool.concat(specialCharacters);
+  else if (!userChoices[1] && !userChoices[2] && userChoices[3] && !userChoices[4]) {
+    while (randomPassword.length < passLength) {
+      randomPassword.push(getRandom(numericCharacters));
+    }
+  }
+  else if (!userChoices[1] && !userChoices[2] && !userChoices[3] && userChoices[4]) {
+    while (randomPassword.length < passLength) {
+      randomPassword.push(getRandom(specialCharacters));
+    }
+  }
+  else if (userChoices[1] && userChoices[2] && !userChoices[3] && !userChoices[4]) {
+    while (randomPassword.length < passLength) {
+      randomPassword.push(getRandom(lowerCasedCharacters));
+      randomPassword.push(getRandom(upperCasedCharacters));
+    }
+  }
+  else if (userChoices[1] && !userChoices[2] && userChoices[3] && !userChoices[4]) {
+    while (randomPassword.length < passLength) {
+      randomPassword.push(getRandom(lowerCasedCharacters));
+      randomPassword.push(getRandom(numericCharacters));
+    }
+  }
+  else if (userChoices[1] && !userChoices[2] && !userChoices[3] && userChoices[4]) {
+    while (randomPassword.length < passLength) {
+      randomPassword.push(getRandom(lowerCasedCharacters));
+      randomPassword.push(getRandom(specialCharacters));
+    }
+  }
+  else if (!userChoices[1] && userChoices[2] && userChoices[3] && !userChoices[4]) {
+    while (randomPassword.length < passLength) {
+      randomPassword.push(getRandom(upperCasedCharacters));
+      randomPassword.push(getRandom(numericCharacters));
+    }
+  }
+  else if (!userChoices[1] && userChoices[2] && !userChoices[3] && userChoices[4]) {
+    while (randomPassword.length < passLength) {
+      randomPassword.push(getRandom(upperCasedCharacters));
+      randomPassword.push(getRandom(specialCharacters));
+    }
+  }
+  else if (!userChoices[1] && !userChoices[2] && userChoices[3] && userChoices[4]) {
+    while (randomPassword.length < passLength) {
+      randomPassword.push(getRandom(numericCharacters));
+      randomPassword.push(getRandom(specialCharacters));
+    }
+  }
+  else if (userChoices[1] && userChoices[2] && userChoices[3] && !userChoices[4]) {
+    while (randomPassword.length < passLength) {
+      randomPassword.push(getRandom(lowerCasedCharacters));
+      randomPassword.push(getRandom(upperCasedCharacters));
+      randomPassword.push(getRandom(numericCharacters));
+    }
+  }
+  else if (userChoices[1] && userChoices[2] && !userChoices[3] && userChoices[4]) {
+    while (randomPassword.length < passLength) {
+      randomPassword.push(getRandom(lowerCasedCharacters));
+      randomPassword.push(getRandom(upperCasedCharacters));
+      randomPassword.push(getRandom(specialCharacters));
+    }
+  }
+  else if (userChoices[1] && !userChoices[2] && userChoices[3] && userChoices[4]) {
+    while (randomPassword.length < passLength) {
+      randomPassword.push(getRandom(lowerCasedCharacters));
+      randomPassword.push(getRandom(numericCharacters));
+      randomPassword.push(getRandom(specialCharacters));
+    }
+  }
+  else if (!userChoices[1] && userChoices[2] && userChoices[3] && userChoices[4]) {
+    while (randomPassword.length < passLength) {
+      randomPassword.push(getRandom(upperCasedCharacters));
+      randomPassword.push(getRandom(numericCharacters));
+      randomPassword.push(getRandom(specialCharacters));
+    }
   }
 
-  var randomPassword = [];
-  for (var i=0;i<passLength;i++) {
-    randomPassword.push(getRandom(passPool));
-  }
   console.log(userChoices);
-  console.log(passPool);
   console.log(randomPassword);
   return randomPassword.join('');
 }
