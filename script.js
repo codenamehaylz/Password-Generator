@@ -120,8 +120,8 @@ function generatePassword() {
   //+ turns userChoices[0] into a number type
   var passLength = +userChoices[0];
   var randomPassword = [];
-//if statements check if choice = true, then an element is taken from the associated array. This ensures the password is gauranteed to include all chosen characters
-//break scenario after each action ensures no extra characters are added
+  //if statements check if choice = true, then an element is taken from the associated array. This ensures the password is guaranteed to include all chosen characters
+  //break scenario after each action ensures no extra characters are added
   while (randomPassword.length < passLength) {
     if (userChoices[1]) {
       randomPassword.push(getRandom(lowerCasedCharacters));
