@@ -115,108 +115,35 @@ function getRandom(arr) {
 }
 
 // Function to generate password with user input
-//TODO find a way to condense these if statements??
 function generatePassword() {
   var userChoices = getPasswordOptions();
+  //+ turns userChoices[0] into a number type
   var passLength = +userChoices[0];
   var randomPassword = [];
-
-  if (userChoices[1] && userChoices[2] && userChoices[3] && userChoices[4]) {
-    while (randomPassword.length < passLength) {
+//if statements check if choice = true, then an element is taken from the associated array. This ensures the password is gauranteed to include all chosen characters
+//break scenario after each action ensures no extra characters are added
+  while (randomPassword.length < passLength) {
+    if (userChoices[1]) {
       randomPassword.push(getRandom(lowerCasedCharacters));
+      if (randomPassword.length === passLength){break;}
+    }
+    if (userChoices[2]) {
       randomPassword.push(getRandom(upperCasedCharacters));
+      if (randomPassword.length === passLength){break;}
+    }
+    if (userChoices[3]) {
       randomPassword.push(getRandom(numericCharacters));
+      if (randomPassword.length === passLength){break;}
+    }
+    if (userChoices[4]) {
       randomPassword.push(getRandom(specialCharacters));
+      if (randomPassword.length === passLength){break;}
     }
   }
-  else if (userChoices[1] && !userChoices[2] && !userChoices[3] && !userChoices[4]) {
-    while (randomPassword.length < passLength) {
-      randomPassword.push(getRandom(lowerCasedCharacters));
-    }
-  }
-  else if (!userChoices[1] && userChoices[2] && !userChoices[3] && !userChoices[4]) {
-    while (randomPassword.length < passLength) {
-      randomPassword.push(getRandom(upperCasedCharacters));
-    }
-  }
-  else if (!userChoices[1] && !userChoices[2] && userChoices[3] && !userChoices[4]) {
-    while (randomPassword.length < passLength) {
-      randomPassword.push(getRandom(numericCharacters));
-    }
-  }
-  else if (!userChoices[1] && !userChoices[2] && !userChoices[3] && userChoices[4]) {
-    while (randomPassword.length < passLength) {
-      randomPassword.push(getRandom(specialCharacters));
-    }
-  }
-  else if (userChoices[1] && userChoices[2] && !userChoices[3] && !userChoices[4]) {
-    while (randomPassword.length < passLength) {
-      randomPassword.push(getRandom(lowerCasedCharacters));
-      randomPassword.push(getRandom(upperCasedCharacters));
-    }
-  }
-  else if (userChoices[1] && !userChoices[2] && userChoices[3] && !userChoices[4]) {
-    while (randomPassword.length < passLength) {
-      randomPassword.push(getRandom(lowerCasedCharacters));
-      randomPassword.push(getRandom(numericCharacters));
-    }
-  }
-  else if (userChoices[1] && !userChoices[2] && !userChoices[3] && userChoices[4]) {
-    while (randomPassword.length < passLength) {
-      randomPassword.push(getRandom(lowerCasedCharacters));
-      randomPassword.push(getRandom(specialCharacters));
-    }
-  }
-  else if (!userChoices[1] && userChoices[2] && userChoices[3] && !userChoices[4]) {
-    while (randomPassword.length < passLength) {
-      randomPassword.push(getRandom(upperCasedCharacters));
-      randomPassword.push(getRandom(numericCharacters));
-    }
-  }
-  else if (!userChoices[1] && userChoices[2] && !userChoices[3] && userChoices[4]) {
-    while (randomPassword.length < passLength) {
-      randomPassword.push(getRandom(upperCasedCharacters));
-      randomPassword.push(getRandom(specialCharacters));
-    }
-  }
-  else if (!userChoices[1] && !userChoices[2] && userChoices[3] && userChoices[4]) {
-    while (randomPassword.length < passLength) {
-      randomPassword.push(getRandom(numericCharacters));
-      randomPassword.push(getRandom(specialCharacters));
-    }
-  }
-  else if (userChoices[1] && userChoices[2] && userChoices[3] && !userChoices[4]) {
-    while (randomPassword.length < passLength) {
-      randomPassword.push(getRandom(lowerCasedCharacters));
-      randomPassword.push(getRandom(upperCasedCharacters));
-      randomPassword.push(getRandom(numericCharacters));
-    }
-  }
-  else if (userChoices[1] && userChoices[2] && !userChoices[3] && userChoices[4]) {
-    while (randomPassword.length < passLength) {
-      randomPassword.push(getRandom(lowerCasedCharacters));
-      randomPassword.push(getRandom(upperCasedCharacters));
-      randomPassword.push(getRandom(specialCharacters));
-    }
-  }
-  else if (userChoices[1] && !userChoices[2] && userChoices[3] && userChoices[4]) {
-    while (randomPassword.length < passLength) {
-      randomPassword.push(getRandom(lowerCasedCharacters));
-      randomPassword.push(getRandom(numericCharacters));
-      randomPassword.push(getRandom(specialCharacters));
-    }
-  }
-  else if (!userChoices[1] && userChoices[2] && userChoices[3] && userChoices[4]) {
-    while (randomPassword.length < passLength) {
-      randomPassword.push(getRandom(upperCasedCharacters));
-      randomPassword.push(getRandom(numericCharacters));
-      randomPassword.push(getRandom(specialCharacters));
-    }
-  }
-
-  console.log(userChoices);
-  console.log(randomPassword);
-  return randomPassword.join('');
+  //Sorts the array into a random order so it is not as predictable
+  var shuffledPass = randomPassword.sort(() => Math.random() - 0.5);
+  //returns the shuffled elements joined together in one string
+  return shuffledPass.join('');
 }
 
 // Get references to the #generate element
